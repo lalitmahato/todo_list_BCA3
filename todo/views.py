@@ -15,5 +15,10 @@ def json_response(request):
     return JsonResponse(my_response)
 
 def template_hello_world(request):
-    context = {}
+    context = {
+        "Name": "Lalit Mahato",
+        "Student_ID": 10000000000001,
+        "Message": "Hello Word",
+        "Status": True 
+    }
     return render(request, "index.html", context)
