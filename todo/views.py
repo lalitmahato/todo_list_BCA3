@@ -13,3 +13,7 @@ def json_response(request):
         "Status": True 
     }
     return JsonResponse(my_response)
+
+def template_hello_world(request):
+    context = {}
+    return render(request, "index.html", context)
