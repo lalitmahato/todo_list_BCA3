@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
+from todo.models import Todo
 
 # Create your views here.
 def hello_world(request):
@@ -22,3 +23,11 @@ def template_hello_world(request):
         "Status": True 
     }
     return render(request, "index.html", context)
+
+
+def todo_list(request):
+    todo_query = Todo.objects.all()
+    context = {
+        "todo_query": todo_query
+    }
+    return render(request, "todo/todo_list.html", context)
