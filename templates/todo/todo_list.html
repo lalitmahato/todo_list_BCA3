@@ -1,5 +1,5 @@
 <h1>Todo List</h1>
 <p>title | email | description | created_datetime | completion_status</p>
 {% for todo in todo_query %}
-{{ todo.title }} | {{ todo.email }} | {{ todo.description }} | {{ todo.created_datetime }} | {{ todo.completion_status }}
+<li>{{ todo.title }} | {{ todo.email }} | {{ todo.description }} | {{ todo.created_datetime }} | {{ todo.completion_status }}</li>
 {% endfor %}
