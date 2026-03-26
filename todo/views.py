@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.http import JsonResponse
 from todo.models import Todo
 from todo.forms import TodoForm
@@ -27,7 +27,7 @@ def template_hello_world(request):
 
 
 def todo_list(request):
-    todo_query = Todo.objects.filter(completion_status=False)
+    todo_query = Todo.objects.filter()
     context = {
         "todo_query": todo_query
     }
@@ -35,6 +35,21 @@ def todo_list(request):
 
 def create_todo(request):
     form = TodoForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid:
+            form.save()
+            return redirect("todo_list")
+    context = {
+        "form": form
+    }
+    return render(request, "todo/create_todo.html", context)
+
+
+def update_todo(request, id):
+    # instance = Todo.objects.get(id=id)
+    # instance = Todo.objects.filter(id=id).first()
+    instance = get_object_or_404(Todo, id=id)
+    form = TodoForm(request.POST or None, instance=instance)
     if request.method == "POST":
         if form.is_valid:
             form.save()
