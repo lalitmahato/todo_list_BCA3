@@ -58,3 +58,11 @@ def update_todo(request, id):
         "form": form
     }
     return render(request, "todo/create_todo.html", context)
+
+
+def delete_todo(request, id):
+    # instance = Todo.objects.get(id=id)
+    # instance = Todo.objects.filter(id=id).first()
+    instance = get_object_or_404(Todo, id=id)
+    instance.delete()
+    return redirect("todo_list")
